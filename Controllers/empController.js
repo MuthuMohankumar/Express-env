@@ -62,6 +62,9 @@ export const deleteEmpById=async(req,res)=>{
     try {
         const empId=req.params.id;
         const result=await Employee.deleteOne({_id:empId})
+        if(!result){
+            return res.status(404).send("No employee found in ID",empId)
+        }
         res.status(200).send("data Deleted")
         
     } catch (error) {
